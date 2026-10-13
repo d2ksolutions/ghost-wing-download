@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ghost Wing — tải bản Android</title>
+<meta name="description" content="Ghost Wing: demo bay ném bom arcade hư cấu trên quần đảo Vesper. Tải bản thử nghiệm cho Android.">
+<meta property="og:title" content="Ghost Wing — bản thử nghiệm Android">
+<meta property="og:description" content="Demo bay ném bom arcade hư cấu: máy bay cánh bay Nightwing trên quần đảo Vesper.">
+<meta property="og:image" content="img/hero.jpg">
+<style>
+  :root {
+    --bg: #070d13;
+    --bg-2: #0c1620;
+    --panel: #101d29;
+    --line: #1d3242;
+    --text: #e6eef4;
+    --muted: #8fa3b1;
+    --accent: #59d8f2;
+    --accent-ink: #04151c;
+    --warn: #ffc94d;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+  a { color: var(--accent); }
+  img { display: block; max-width: 100%; height: auto; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+
+  header.hero {
+    background:
+      radial-gradient(120% 80% at 50% 0%, #17324a 0%, transparent 60%),
+      linear-gradient(180deg, var(--bg-2), var(--bg));
+    padding: 56px 0 24px;
+    text-align: center;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 12px;
+  }
+  h1 {
+    margin: 14px 0 6px;
+    font-size: clamp(40px, 8vw, 72px);
+    line-height: 1.05;
+    letter-spacing: .02em;
+    color: var(--accent);
+  }
+  .tagline { margin: 0 auto; max-width: 620px; color: #c9d6df; font-size: 18px; }
+  .cta { margin: 28px 0 10px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px; border-radius: 12px;
+    font-weight: 600; font-size: 17px; text-decoration: none;
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 8px 30px rgba(89,216,242,.25); }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-ghost { color: var(--text); border: 1px solid var(--line); background: rgba(255,255,255,.02); }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+  .meta { color: var(--muted); font-size: 14px; }
+  .hero-shot {
+    margin: 32px auto 0; max-width: 1080px;
+    border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 20px 60px rgba(0,0,0,.45);
+  }
+
+  section { padding: 44px 0 8px; }
+  h2 { font-size: 26px; margin: 0 0 16px; }
+  .grid { display: grid; gap: 16px; }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 18px 20px;
+  }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: #c3d0d9; }
+
+  .gallery { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  figcaption { padding: 10px 14px; color: var(--muted); font-size: 14px; }
+
+  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 12px; }
+  ol.steps li {
+    counter-increment: s; position: relative;
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 14px 16px 14px 60px;
+  }
+  ol.steps li::before {
+    content: counter(s); position: absolute; left: 16px; top: 14px;
+    width: 30px; height: 30px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: #17384a; color: var(--accent); font-weight: 700;
+  }
+
+  table.controls { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  table.controls td { padding: 10px 14px; border-top: 1px solid var(--line); vertical-align: top; }
+  table.controls tr:first-child td { border-top: 0; }
+  table.controls td:first-child { color: var(--accent); white-space: nowrap; font-weight: 600; width: 34%; }
+
+  .note {
+    background: rgba(255,201,77,.07); border: 1px solid rgba(255,201,77,.35);
+    border-radius: var(--radius); padding: 14px 18px; color: #f1e3bf;
+  }
+  .note strong { color: var(--warn); }
+  code, .hash {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 13px;
+    background: #0a141c; border: 1px solid var(--line); border-radius: 6px; padding: 2px 6px;
+    overflow-wrap: anywhere;
+  }
+  .specs { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; }
+  .specs dt { color: var(--muted); }
+  .specs dd { margin: 0; overflow-wrap: anywhere; }
+
+  footer { margin-top: 48px; padding: 28px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  footer p { margin: 6px 0; }
+
+  @media (max-width: 560px) {
+    header.hero { padding-top: 36px; }
+    .btn { width: 100%; justify-content: center; }
+    table.controls td:first-child { white-space: normal; width: 40%; }
+    .specs { grid-template-columns: 1fr; gap: 2px; }
+    .specs dd { margin-bottom: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Bản thử nghiệm 0.1.0 · Android</span>
+    <h1>GHOST WING</h1>
+    <p class="tagline">Demo bay ném bom arcade hư cấu: lái máy bay cánh bay <strong>Nightwing</strong> qua quần đảo Vesper, phá mục tiêu bằng bom thật và quay về căn cứ trước khi cạn nhiên liệu.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://github.com/d2ksolutions/ghost-wing-download/releases/download/v0.1.0/GhostWing-debug.apk" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        Tải APK cho Android (53 MB)
+      </a>
+      <a class="btn btn-ghost" href="#cai-dat">Hướng dẫn cài đặt</a>
+    </div>
+    <p class="meta">Android 7.0 trở lên · điện thoại 64-bit (arm64) · chơi offline, tiếng Việt</p>
+    <div class="hero-shot"><img src="img/hero.jpg" width="1300" height="360" alt="Máy bay Nightwing bay trên biển, nhìn từ phía trước bên trên"></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Trong game có gì</h2>
+    <div class="grid grid-3">
+      <div class="card"><h3>3 nhiệm vụ</h3><p>Làm quen bầu trời, phá ba mục tiêu tĩnh, rồi săn đoàn xe đang chạy. Hoàn thành nhiệm vụ trước để mở khóa nhiệm vụ sau.</p></div>
+      <div class="card"><h3>Bom và nhiên liệu thật</h3><p>8 quả bom rơi theo quỹ đạo thật, có vòng ngắm điểm rơi. Hết nhiên liệu thì máy bay lượn khẩn cấp 60 giây để tìm đường về.</p></div>
+      <div class="card"><h3>Về căn cứ an toàn</h3><p>Chỉ được tính thành công khi bay vào vòng tiếp nhận đúng độ cao, tốc độ và góc nghiêng rồi chạm TIẾP NHẬN.</p></div>
+      <div class="card"><h3>Quần đảo Vesper</h3><p>Sáu hòn đảo núi lửa có khe xói, rừng cây, vách đá ven biển, mây thể tích và bóng mây trôi trên mặt biển.</p></div>
+      <div class="card"><h3>Điều khiển cảm ứng</h3><p>Cần lái nổi bên trái, thanh ga bên phải, nút lớn cho bom và tiếp nhận; chạm được nhiều ngón cùng lúc.</p></div>
+      <div class="card"><h3>Chơi không cần mạng</h3><p>Không tài khoản, không quảng cáo, không gửi dữ liệu. Tiến độ lưu ngay trên máy.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Hình ảnh</h2>
+    <div class="gallery">
+      <figure><img src="img/touch-flight.jpg" width="1280" height="576" loading="lazy" alt="Màn hình bay trên điện thoại với cần lái, thanh ga và nút bom"><figcaption>Giao diện điện thoại: cần lái, thanh ga, nút BOM</figcaption></figure>
+      <figure><img src="img/recovery.jpg" width="1280" height="576" loading="lazy" alt="Tiếp cận căn cứ, vòng tiếp nhận màu xanh và nút tiếp nhận sáng lên"><figcaption>Về căn cứ: vào vòng xanh rồi chạm TIẾP NHẬN</figcaption></figure>
+      <figure><img src="img/clouds.jpg" width="1280" height="720" loading="lazy" alt="Máy bay trên căn cứ với mây thể tích phía sau"><figcaption>Mây thể tích (đồ họa Trung bình/Cao)</figcaption></figure>
+      <figure><img src="img/islands.jpg" width="1280" height="720" loading="lazy" alt="Đảo núi lửa với khe xói và rừng cây"><figcaption>Đảo có khe xói, rừng và vách đá</figcaption></figure>
+      <figure><img src="img/aircraft.jpg" width="1280" height="720" loading="lazy" alt="Mặt dưới máy bay Nightwing với mép sau hình răng cưa"><figcaption>Nightwing nhìn từ dưới</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="cai-dat">
+    <h2>Cài đặt trên Android</h2>
+    <ol class="steps">
+      <li>Mở trang này trên điện thoại và bấm <strong>Tải APK cho Android</strong> (hoặc tải trên máy tính rồi chép file <code>GhostWing-debug.apk</code> sang điện thoại).</li>
+      <li>Mở file vừa tải trong thông báo hoặc ứng dụng <em>Tệp</em>. Nếu máy hỏi, cho phép trình duyệt/ứng dụng Tệp <strong>“Cài đặt ứng dụng không rõ nguồn gốc”</strong>.</li>
+      <li>Bấm <strong>Cài đặt</strong>. Google Play Protect có thể cảnh báo vì đây là bản thử nghiệm chưa đưa lên Play Store — chọn <em>Vẫn cài đặt</em> nếu bạn tin nguồn này.</li>
+      <li>Mở <strong>Ghost Wing</strong>, xoay ngang điện thoại. Lần đầu nên xem mục <em>Điều khiển</em> ở màn hình chính.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Cách điều khiển</h2>
+    <table class="controls">
+      <tr><td>Cần lái (trái)</td><td>Chạm vào nửa dưới bên trái, cần lái sẽ đặt ngay dưới ngón cái. Đẩy lên/xuống để ngẩng/hạ mũi, sang trái/phải để nghiêng cánh và rẽ.</td></tr>
+      <tr><td>Thanh ga (phải)</td><td>Kéo tới mức ga muốn đặt; ga thấp tiết kiệm nhiên liệu, ga cao bay nhanh.</td></tr>
+      <tr><td>BOM</td><td>Mỗi lần chạm thả một quả. Vòng vàng trên mặt đất là điểm rơi dự kiến.</td></tr>
+      <tr><td>TIẾP NHẬN</td><td>Sáng lên khi đủ điều kiện hạ cánh ở căn cứ: trong vòng 650 m, cao 80–300 m, ≤130 m/s, nghiêng ≤20°.</td></tr>
+      <tr><td>BẢN ĐỒ · VỀ CĂN CỨ</td><td>Mở bản đồ lớn (game tạm dừng) hoặc đặt điểm đến về căn cứ.</td></tr>
+      <tr><td>II · nút Back</td><td>Tạm dừng. Chuyển sang ứng dụng khác thì game cũng tự tạm dừng.</td></tr>
+      <tr><td>Vuốt vùng trống</td><td>Xoay camera nhìn quanh máy bay.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Lưu ý</h2>
+    <div class="note">
+      <p><strong>Đây là bản thử nghiệm (debug).</strong> Game chưa được thử trên nhiều mẫu điện thoại. Nếu bị giật, vào <em>Cài đặt → Chất lượng đồ họa</em> và giữ mức <em>Thấp</em> (mặc định trên điện thoại). Bản cài này ký bằng khóa thử nghiệm, nên không cập nhật đè được lên bản Play Store sau này — khi đó hãy gỡ bản cũ trước.</p>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <dl class="specs">
+        <dt>Tệp</dt><dd><code>GhostWing-debug.apk</code> · 52 978 151 byte</dd>
+        <dt>Phiên bản</dt><dd>0.1.0 (mã 1) · gói <code>com.ghostwing.demo</code></dd>
+        <dt>Yêu cầu</dt><dd>Android 7.0 (API 24) trở lên, CPU 64-bit (arm64-v8a), OpenGL ES 3.0</dd>
+        <dt>SHA-256</dt><dd><span class="hash">90f43b727cc91f5415c96a08dcb1e947d3c613184863433feb55b1b382b23cbc</span></dd>
+        <dt>Tất cả bản</dt><dd><a href="https://github.com/d2ksolutions/ghost-wing-download/releases">Trang Releases</a></dd>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Ghost Wing là trò chơi hư cấu: máy bay Nightwing, quần đảo Vesper, ký hiệu “NW-07” và các nhiệm vụ đều không mô phỏng lực lượng hay sự kiện có thật.</p>
+    <p>Làm bằng <a href="https://godotengine.org">Godot Engine</a> 4.7 — Copyright (c) 2014-present Godot Engine contributors; (c) 2007-2014 Juan Linietsky, Ariel Manzur. Phát hành theo <a href="https://godotengine.org/license">giấy phép MIT</a>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
